@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct SelectCurrency: View {
-    @State var gridLayout = [GridItem(), GridItem(), GridItem()]
     @Environment(\.dismiss) var dismiss
+    @Binding var leftCurrency: Currency
+    @Binding var rightCurrency: Currency
+    @State var gridLayout = [GridItem(), GridItem(), GridItem()]
     
     var body: some View {
         ZStack {
@@ -28,7 +30,15 @@ struct SelectCurrency: View {
                 // Currency icons
                 LazyVGrid(columns: gridLayout) {
                     ForEach(0..<5) { i in
-                        CurrencyIcon(currencyImage: CurrencyImage.allCases[i].rawValue, currencyText: CurrencyText.allCases[i].rawValue)
+                        if Currency.allCases[i] == leftCurrency {
+                            CurrencyIcon(currencyImage: CurrencyImage.allCases[i].rawValue, currencyText: CurrencyText.allCases[i].rawValue)
+                                .overlay(RoundedRectangle(cornerRadius: 25)
+                                    .stroke(lineWidth: 3)
+                                    .opacity(0.5))
+                                .shadow(color: .black, radius: 9)
+                        } else {
+                            CurrencyIcon(currencyImage: CurrencyImage.allCases[i].rawValue, currencyText: CurrencyText.allCases[i].rawValue)
+                        }
                     }
                 }
                 
@@ -55,6 +65,6 @@ struct SelectCurrency: View {
 
 struct SelectCurrency_Previews: PreviewProvider {
     static var previews: some View {
-        SelectCurrency()
+        SelectCurrency(leftCurrency: .constant(.silverPiece), rightCurrency: .constant(.goldPiece))
     }
 }
