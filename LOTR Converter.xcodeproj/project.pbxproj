@@ -64,11 +64,11 @@
 				5B094FB32A94CF8D0015F7E4 /* Assets.xcassets */,
 				5B094FB12A94CF8D0015F7E4 /* ContentView.swift */,
 				5B1A41942A9626170020E4B2 /* Currency.swift */,
+				5B9BC1422A95249300560447 /* CurrencyIcon.swift */,
 				5B9F2A082A9501E00007C8C4 /* ExchangeInfo.swift */,
 				5B9F2A0A2A9510000007C8C4 /* ExchangeRate.swift */,
 				5B094FAF2A94CF8D0015F7E4 /* LOTR_ConverterApp.swift */,
 				5B9BC1402A951CB500560447 /* SelectCurrency.swift */,
-				5B9BC1422A95249300560447 /* CurrencyIcon.swift */,
 				5B094FB52A94CF8D0015F7E4 /* Preview Content */,
 			);
 			path = "LOTR Converter";
