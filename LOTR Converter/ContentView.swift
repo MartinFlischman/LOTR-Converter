@@ -12,6 +12,8 @@ struct ContentView: View {
     @State var rightAmount = ""
     @State var leftCurrency: Currency = .silverPiece
     @State var rightCurrency: Currency = .goldPiece
+    @State var showSelectCurrency = false
+    @State var showExchangeInfo = false
     
     var body: some View {
         ZStack {
@@ -50,6 +52,12 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                         }
                         .padding(.bottom, -3)
+                        .onTapGesture {
+                            showSelectCurrency.toggle()
+                        }
+                        .sheet(isPresented: $showSelectCurrency) {
+                            SelectCurrency(leftCurrency: $leftCurrency, rightCurrency: $rightCurrency)
+                        }
                         
                         // Text field
                         TextField("Amount", text: $leftAmount)
@@ -79,6 +87,12 @@ struct ContentView: View {
                                 .frame(height: 33)
                         }
                         .padding(.bottom, -3)
+                        .onTapGesture {
+                            showSelectCurrency.toggle()
+                        }
+                        .sheet(isPresented: $showSelectCurrency) {
+                            SelectCurrency(leftCurrency: $leftCurrency, rightCurrency: $rightCurrency)
+                        }
                         
                         // Text field
                         TextField("Amount", text: $rightAmount)
@@ -99,16 +113,19 @@ struct ContentView: View {
                     Spacer()
                     
                     Button {
-                        // Display exchange info
+                        showExchangeInfo.toggle()
                     } label: {
                         Image(systemName: "info.circle.fill")
                     }
                     .font(.largeTitle)
                     .foregroundColor(.white)
                     .padding(.trailing)
+                    .sheet(isPresented: $showExchangeInfo) {
+                        ExchangeInfo()
+                    }
                 }
             }
-            .padding()
+            .padding(5)
         }
     }
 }

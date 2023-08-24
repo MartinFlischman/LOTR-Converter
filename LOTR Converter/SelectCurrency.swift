@@ -11,7 +11,6 @@ struct SelectCurrency: View {
     @Environment(\.dismiss) var dismiss
     @Binding var leftCurrency: Currency
     @Binding var rightCurrency: Currency
-    @State var gridLayout = [GridItem(), GridItem(), GridItem()]
     
     var body: some View {
         ZStack {
@@ -28,19 +27,7 @@ struct SelectCurrency: View {
                     .multilineTextAlignment(.center)
                 
                 // Currency icons
-                LazyVGrid(columns: gridLayout) {
-                    ForEach(0..<5) { i in
-                        if Currency.allCases[i] == leftCurrency {
-                            CurrencyIcon(currencyImage: CurrencyImage.allCases[i].rawValue, currencyText: CurrencyText.allCases[i].rawValue)
-                                .overlay(RoundedRectangle(cornerRadius: 25)
-                                    .stroke(lineWidth: 3)
-                                    .opacity(0.5))
-                                .shadow(color: .black, radius: 9)
-                        } else {
-                            CurrencyIcon(currencyImage: CurrencyImage.allCases[i].rawValue, currencyText: CurrencyText.allCases[i].rawValue)
-                        }
-                    }
-                }
+                IconGrid(currency: $leftCurrency)
                 
                 // Text
                 Text("Select the currency you would like to convert to:")
@@ -48,6 +35,7 @@ struct SelectCurrency: View {
                         .multilineTextAlignment(.center)
                 
                 // Currency icons
+                IconGrid(currency: $rightCurrency)
                 
                 // Done button
                 Button("Done") {
